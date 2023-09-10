@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+import LoginRegister from './components/defaultPages/LoginRegisterPage.jsx'
+import SocietyHomePage from './components/SocietyHomePage.jsx'
+import {
+  createBrowserRouter,
+  RouterProvider
+} from "react-router-dom";
 import './App.css';
+import React from 'react';
+import Apps from './components/Apps.jsx'
+
+const router = createBrowserRouter([
+    {
+      path: "/login-register",
+      element: <LoginRegister />
+    },
+    {
+      path: "/apps",
+      element: <Apps />
+    }, {
+      path: "/",
+      element: <SocietyHomePage />
+    },
+  ]
+);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  return(
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
   );
 }
 
