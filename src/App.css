@@ -1,39 +1,84 @@
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
+/* App.css */
 .navbar {
-  background-color: #f2f2f2;
-  padding: 10px;
-}
-
-.navbar-items {
-  list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  background-color: #333;
+  padding: 1rem;
 }
 
-.navbar-items li {
-  margin-right: 10px;
-}
-
-.navbar-items li a {
+.nav-link {
+  color: white;
   text-decoration: none;
-  color: #333;
-  padding: 5px;
 }
 
-.navbar-items li a:hover {
-  color: #000;
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.sidebar-content a {
+  text-decoration: none;
+  color: black;
+  padding: 0.5rem 0;
+}
+
+.active-link {
   font-weight: bold;
 }
 
-.appsListOuterDiv {
-  padding: 10px;
+button {
+  margin: 1rem;
 }
 
-.appsListItemGroup {
-  margin: 10px;
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-button {
+  margin-top: 20px;
+  margin-left: 85%;
+  width: 100px;
+  float: right;
+  background-color: #fff;
+  border-color: #ddd;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.add-chatbot-button, .add-workflow-button {
+  margin-left: 92.20%;
+  margin-bottom: 20px;
+}
+
+.chatbot-list-container, .workflow-list-container {
+  width: 90%;
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+body > dx-license:nth-child(1) {
+  display: none;
+}
+
+.chatbot-list-container > .add-chatbot-form {
+  width: 500px;
+}
+
+.input-generic {
+  margin: 2.5px
+}
+
+.bread-crumb {
+  display: block;
+  width: 100%;
+}
+
+.workflow-form-container {
+  padding-top: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
