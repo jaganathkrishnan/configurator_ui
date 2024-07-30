@@ -10,7 +10,7 @@ export default class WorkflowDetails extends Component {
       workflowObj: this.props.workflowObj ? this.props.workflowObj : Workflow.generateEmptyWorkflowObject(),
       chatbots: this.props.chatbots
     }
-    debugger;
+    // debugger;
   }
 
   chatBotDropdownOptions = () => {
@@ -51,7 +51,13 @@ export default class WorkflowDetails extends Component {
     const { workflowObj } = this.state;
 
     try {
-      workflowObj.createObj();
+      if (workflowObj.id()) {
+        workflowObj.updateObj();
+      } else {
+        workflowObj.createObj();
+      }
+      this.props.updateActivePaneIndex(1)
+
     } catch (error) {
       console.log(error)
     }

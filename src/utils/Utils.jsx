@@ -7,7 +7,6 @@ export const decryptString = (string) => {
 }
 
 export const validImageExtensionCheck = (fileObj) => {
-  debugger;
   const extension = fileObj.name.split(".").pop();
   const validExtensions = ["png", "jpg", "jpeg"];
   return validExtensions.includes(extension)
@@ -22,4 +21,8 @@ export const logoutSession = () => {
   //TO-DO: Hit backend to delete token
   localStorage.removeItem(encryptString("aptx-configurator-session-token"));
   window.location.href = '/';
+}
+
+export const refreshPage = () => {
+  window.location.reload()
 }

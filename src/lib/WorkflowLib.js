@@ -52,23 +52,29 @@ export class Workflow {
   }
 
   createObj() {
-    const payload = {
-      workflow: {
-        name: this.name(),
-        type: "default",
-        is_published: this.isPublished(),
-        chat_bot_id: this.chatBotId(),
-        start_status: {
-          label: "Start",
-          google_form_id: ""
-        }
-      }
-    }
     try {
-      axios.post("http://localhost:1001/workflow", payload, {
+      axios.post("http://localhost:1001/workflow", this.generateObjDetailsPayload(), {
         headers: this.generateHeaders()
       }).then((response) => {
-        if (response.ok) {
+        if (response.status >= 200 && response.status < 300) {
+          return true
+        } else {
+          throw response.json()
+        }
+      })
+    } catch(error) {
+      throw error
+    }
+  }
+
+  updateObj() {
+    const payload = this.generateObjDetailsPayload()
+    payload.workflow.id = this.id()
+    try {
+      axios.patch("http://localhost:1001/workflow", payload, {
+        headers: this.generateHeaders()
+      }).then((response) => {
+        if (response.status >= 200 && response.status < 300) {
           return true
         } else {
           throw response.json()
@@ -83,6 +89,21 @@ export class Workflow {
     return {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('apartix_session_id')}`
+    }
+  }
+
+  generateObjDetailsPayload() {
+    return {
+      workflow: {
+        name: this.name(),
+        type: "default",
+        is_published: this.isPublished(),
+        chat_bot_id: this.chatBotId(),
+        start_status: {
+          label: "Start",
+          google_form_id: ""
+        }
+      }
     }
   }
 

@@ -9,6 +9,7 @@ import WorkflowList from './components/workflow_components/WorkflowList.js';
 import WorkflowForm from './components/workflow_components/WorkflowForm.js'
 import Button from 'devextreme-react/button';
 import './App.css';  // Import the CSS for global styles and the App component
+import 'beautiful-react-diagrams/styles.css';
 import { useParams } from 'react-router-dom'
 
 class App extends Component {

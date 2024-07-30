@@ -4,6 +4,7 @@ import { Workflow } from '../../lib/WorkflowLib';
 import { Tab, Container } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import WorkflowDetails from './WorkflowDetails';
+import Statuses from './Statuses';
 
 //please fix this component to be able to pass workflowObj and statuses to WorkflowDetails component
 class WorkflowForm extends Component {
@@ -18,7 +19,8 @@ class WorkflowForm extends Component {
       workflowId: workflowId === "new" ? null : workflowId,
       workflowObj: null,
       chatbots: [],
-      error: null
+      error: null,
+      activePaneIndex: 0
     }
   }
 
@@ -33,6 +35,12 @@ class WorkflowForm extends Component {
         this.fetchChatbots();
       }
     }
+  }
+
+  updateActivePaneIndex = (newActiveIndex) => {
+    this.setState({
+      activePaneIndex: newActiveIndex
+    })
   }
 
   fetchChatbots = async () => {
@@ -72,7 +80,7 @@ class WorkflowForm extends Component {
       if (response.ok) {
 
         const { data } = result;
-        const workflowObj = new Workflow(data["workflow"], data["statuses"],
+        const workflowObj = new Workflow(data["workflow"], data["status_tree"],
         data["workflow_variables"],
         data["workflow_level_actions"])
         const chatbots = data["chat_bots"].map((chatBotRecord) => {return new Chatbot(chatBotRecord)})
@@ -92,12 +100,15 @@ class WorkflowForm extends Component {
 
   panes = () => {
     const { workflowObj, chatbots } = this.state;
+    if (!workflowObj) {
+      return []
+    }
     return ([
       {
         menuItem: 'Workflow Initial Details',
         render: () => (
           <Tab.Pane>
-            <WorkflowDetails workflowObj={workflowObj} chatbots={chatbots} />
+            <WorkflowDetails workflowObj={workflowObj} chatbots={chatbots} updateActivePaneIndex={this.updateActivePaneIndex} />
           </Tab.Pane>
         ),
       },
@@ -105,8 +116,7 @@ class WorkflowForm extends Component {
         menuItem: 'Statuses',
         render: () => (
           <Tab.Pane>
-            <h3>Content for Tab 2</h3>
-            <p>This is the content of the second tab.</p>
+            <Statuses workflowObj={workflowObj} updateActivePaneIndex={this.updateActivePaneIndex}/>
           </Tab.Pane>
         ),
       },
@@ -131,8 +141,13 @@ class WorkflowForm extends Component {
     ]
   )};
 
+  handleTabChange = (e, { activeIndex }) => {
+    this.setState({activePaneIndex: activeIndex });
+  };
 
   render() {
+    const { activePaneIndex } = this.state;
+
     return (
       <div className="workflow-form-container">
         {this.props.renderMenuButton()}
@@ -140,7 +155,7 @@ class WorkflowForm extends Component {
           Go to Workflows list
         </a>
         <h1>Workflow Details</h1>
-        <Tab panes={this.panes()} />
+        <Tab panes={this.panes()} activeIndex={activePaneIndex} onTabChange={this.handleTabChange}/>
       </div>
     )
   }
