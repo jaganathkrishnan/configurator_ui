@@ -17,8 +17,9 @@ export default class StatusForm extends Component {
   formComponent = () => {
 
     const { newStatus, statusObj, workflowId } = this.state;
+    const { rootStatusId } = this.props;
 
-    return newStatus ? <AddStatusForm workflowId={workflowId} statusObj={statusObj} /> : <EditStatusForm statusObj={statusObj} />;
+    return newStatus ? <AddStatusForm workflowId={workflowId} statusObj={statusObj} /> : <EditStatusForm workflowId={workflowId} statusObj={statusObj} rootStatusId={rootStatusId} />;
   }
 
   render() {
@@ -27,7 +28,7 @@ export default class StatusForm extends Component {
 
     return (
       <>
-        <RightSideFormLayout formTitle={newStatus ? "Add new status" : `Edit ${statusObj.name} status`} formComponent={this.formComponent()} onClose={this.closeForm} onBlur={this.closeForm}/>
+        <RightSideFormLayout formTitle={newStatus ? "Add new status" : `Edit ${statusObj.content} status`} formComponent={this.formComponent()} onClose={this.closeForm} onBlur={this.closeForm}/>
       </>
     )
   }

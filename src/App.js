@@ -21,6 +21,15 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    // Select the dx-license element
+    const licenseElement = document.querySelector('dx-license');
+    if (licenseElement) {
+      // Hide the element
+      licenseElement.style.display = 'none';
+    }
+  }
+
   onSetSidebarOpen = (open) => {
     this.setState({ sidebarOpen: open });
   };

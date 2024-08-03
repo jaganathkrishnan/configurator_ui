@@ -68,8 +68,6 @@ export default class AddStatusForm extends Component {
   render() {
 
     const { eligibleParentStatuses } = this.state;
-    console.log(eligibleParentStatuses)
-    console.log("--------------------")
 
     return (
       <Form className="add-status-form">

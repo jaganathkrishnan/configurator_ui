@@ -6,6 +6,10 @@
   padding: 1rem;
 }
 
+dx-license {
+  display: none !important;
+}
+
 .nav-link {
   color: white;
   text-decoration: none;

@@ -6,6 +6,7 @@ import { Status } from '../../lib/StatusLib';
 import StatusGraph from './GraphHooksNautanki';
 // import RightSideFormLayout from '../../util_components/RightSideFormLayout';
 import StatusForm from './StatusForm';
+import { refreshPage } from '../../utils/Utils';
 
 export default class Statuses extends Component {
 
@@ -29,27 +30,37 @@ export default class Statuses extends Component {
     const { workflowObj } = this.state
     const statuses = [];
     const statusSet = new Set();
-    const rootStatus = new Status(workflowObj.statuses, {x: 250, y: 60})
+    const rootStatus = new Status(workflowObj.statuses[0], {x: 250, y: 60})
+    this.graph = workflowObj.statuses;
+    rootStatus.setStartStatusFlag();
+    this.rootStatusId = rootStatus.id;
     statuses.push(rootStatus)
     statusSet.add(rootStatus.id)
     this.setState({
-      statuses: [...this.breadthFirstSearch(statuses, statusSet)]
+      statuses:[...this.breadthFirstSearch(statuses, statusSet)]
     })
   }
 
   breadthFirstSearch = (statuses, statusSet) => {
     const queue = [...statuses];
-    while(queue.length > 0) {
-      const topStatus = statuses[0];
+    while(true) {
+      const topStatus = queue[0];
+      // console.log("topStatus - ")
+      // console.log(topStatus)
+      // console.log("--------------")
       topStatus.children.forEach((childObj) => {
         const childObjId = childObj.id
         if (!statusSet.has(childObjId)){
-          queue.push(childObj)
-          statuses.push(childObj)
+          const childStatus = new Status(this.graph.find((status) => status.id === childObjId), {x: topStatus.children.find((child) => child.id === childObjId).coordinates.x, y: topStatus.coordinates.y + 75})
+          queue.push(childStatus)
+          statuses.push(childStatus)
           statusSet.add(childObjId)
         }
       })
-      queue.pop()
+      queue.shift()
+      if (queue.length === 0) {
+        break;
+      }
     }
     return statuses
   }
@@ -65,6 +76,7 @@ export default class Statuses extends Component {
         selectedStatus: null
       })
     }
+    refreshPage();
   }
 
   handleSubmit = () => {
@@ -149,7 +161,7 @@ export default class Statuses extends Component {
     console.log("---------")
     return (
       <>
-        <StatusForm workflowId={workflowObj.id()} statusObj={newStatusSelected ? new Status({}, {}) : selectedStatus} closeForm={this.closeForm}/>
+        <StatusForm workflowId={workflowObj.id()} statusObj={newStatusSelected ? new Status({}, {}) : selectedStatus} closeForm={this.closeForm} rootStatusId={this.rootStatusId}/>
       </>
     )
   }

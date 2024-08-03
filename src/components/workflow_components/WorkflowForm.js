@@ -80,6 +80,7 @@ class WorkflowForm extends Component {
       if (response.ok) {
 
         const { data } = result;
+        console.log("workflow response data - ", data)
         const workflowObj = new Workflow(data["workflow"], data["status_tree"],
         data["workflow_variables"],
         data["workflow_level_actions"])

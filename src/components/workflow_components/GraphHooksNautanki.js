@@ -7,7 +7,14 @@ const StatusGraph = ({ nodes, links }) => {
   console.log(nodes)
   console.log("links - ")
   console.log(links)
-  const initialSchema = createSchema({nodes, links});
+  const initialSchema = createSchema({
+    nodes,
+    links,
+    linkExtras: {
+      arrowHead: 'arrow',
+    },
+  });
+  // const initialSchema = createSchema({nodes, links});
   console.log(initialSchema)
   console.log("-----------------")
   const [schema, { onChange }] = useSchema(initialSchema);

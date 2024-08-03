@@ -5,6 +5,12 @@ import { refreshPage } from '../utils/Utils';
 
 export class Status {
   constructor(params, coordinates) {
+    if (!params.children) {
+      params.children = []
+    }
+    if (!params.self_occuring_conditions) {
+      params.self_occuring_conditions = []
+    }
     this.id = params.id
     this.content = params.label
     this.api_name = params.api_name
@@ -12,9 +18,11 @@ export class Status {
     this.status_level_actions = params.status_level_actions
     this.self_occuring_conditions = params.self_occuring_conditions
     const childrenList = [];
+    this.childrenIds = [];
     const noOfChildren = params.children.length;
     if (noOfChildren > 0) {
         params.children.forEach((child, index) => {
+        this.childrenIds.push(child.id)
         const x = Number(((index + 1)/(noOfChildren)).toFixed(2)) * 250;
         childrenList.push(new Status(child, {
           x,
@@ -22,7 +30,7 @@ export class Status {
         }))
       })
     }
-
+    this.parentIds = this.self_occuring_conditions.length > 0 ? this.self_occuring_conditions.map((link) => link.parent_id) : []
     this.children = [...childrenList]
     this.coordinates = coordinates
     this.activePaneIndex = 0
@@ -35,6 +43,66 @@ export class Status {
   //   this.indexPercentageInRow = indexPercentage
   //   this.coordinates = [, ]
   // }
+
+  setStartStatusFlag() {
+    this.startStatus = true
+  }
+
+  setParentId(value) {
+    this.parentIds = value
+  }
+
+  editParentStatus = (newParent) => {
+    let result = true;
+    axios.put("http://localhost:1001/condition_status_linking", {
+      "id": this.id,
+      "parent_status": {
+        "id": newParent
+      },
+      "condition": {
+        "rule": "[]"
+      },
+      "child_status": {
+        "id": this.id
+      }
+    }, {
+      headers: this.generateHeaders()
+    }).then((response) => {
+      alert("Parent status updated successfully")
+      result = true;
+    }).catch((error) => {
+      result = false;
+      //TO-DO: handle error
+      console.log(error)
+    })
+    return result;
+  }
+
+  editChildStatus(newChild) {
+    let result = true;
+    axios.put("http://localhost:1001/condition_status_linking", {
+      "id": this.id,
+      "parent_status": {
+        "id": this.id
+      },
+      "condition": {
+        "rule": "[]"
+      },
+      "child_status": {
+        "id": newChild
+      }
+    }, {
+      headers: this.generateHeaders()
+    }).then((response) => {
+      alert("Child status updated successfully");
+      result = true;
+    }).catch((error) => {
+      result = false;
+      //TO-DO: handle error
+      console.log(error);
+    });
+    return result;
+  }
 
   createStatus(parentStatusId, newValueLabelValue) {
     axios.post("http://localhost:1001/status_linking", {
@@ -52,11 +120,19 @@ export class Status {
       headers: this.generateHeaders()
     }).then((response) => {
       refreshPage();
-      // if (response.ok) {
-      //   refreshPage();
-      // } else {
-      //   throw response.json()
-      // }
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
+
+  editStatusName() {
+    axios.patch("http://localhost:1001/status", {
+      "id": this.id,
+      "label": this.content
+    }, {
+      headers: this.generateHeaders()
+    }).then((response) => {
+      alert("Status name updated successfully")
     }).catch((error) => {
       console.log(error)
     })
@@ -99,7 +175,8 @@ export class Status {
     this.children.forEach((childLink) => {
       links.push({
         input: `${this.id}`,
-        output: `${childLink.id}`
+        output: `${childLink.id}`,
+        // label: `Link from ${this.content} to ${childLink.content}`,
       })
     })
     return links;
@@ -131,65 +208,8 @@ export class Status {
     this.newParentStatusId = value
   }
 
-  linkToParentStatus() {
-    console.log("Hitting here")
-  }
-
-  newLinkFormDetails() {
-    //get eligible parent statuses
-    const parentStatuses = this.getEligibleParentStatuses();
-    return (
-      <>
-      <Label>Parent Status </Label>
-      <Dropdown
-        placeholder='Select Parent Status'
-        fluid
-        selection
-        options={parentStatuses}
-        onChange={this.handleParentStatusChange}
-      />
-      <Button onClick={this.linkToParentStatus}>Link to Parent Status</Button>
-      </>
-    )
-    //render dropdown
-  }
-
-  generateDetailsFormPanes(workflowId) {
-    console.log(workflowId)
-    this.workflowId = workflowId;
-    return [
-      {
-        menuItem: "Simple details",
-        render: (
-            <Form>
-              <Form.Group>
-                <label style={{"margin": "15px"}}>
-                  {"Status Label"}
-                </label>
-                <Input requied onChange={(event) => this.handleApiNameChange(event)}>
-                </Input>
-              </Form.Group>
-            </Form>
-          )
-      }, {
-        menuItem: `Links to ${this.id ? "next statuses" : "parent status"}`,
-        render: (
-          <Form>
-            <Form.Group>
-              {this.id ? this.linkFormDetails() : this.newLinkFormDetails()}
-            </Form.Group>
-          </Form>
-        )
-      }
-    ]
-  }
-
-  generateDetailsForm() {
-    return <>
-      <div>
-        <Tab panes={this.generateDetailsFormPanes} activeIndex={this.activePaneIndex} onTabChange={this.changeDetailsPaneIndex}/>
-      </div>
-    </>
+  isEqlToStatus(status) {
+    return this.id === status.id
   }
 
   generateHeaders(){
@@ -197,5 +217,9 @@ export class Status {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('apartix_session_id')}`
     }
+  }
+
+  setLabel(value) {
+    this.content = value;
   }
 }
