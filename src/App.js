@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, NavLink } from 'react-router-dom';
 import Sidebar from 'react-sidebar';
+
 import Home from './components/Home.js';
 import Login from './components/Login.js';
 import Register from './components/Register.js';
