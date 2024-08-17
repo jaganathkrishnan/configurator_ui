@@ -5,6 +5,7 @@ import { Tab, Container } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import WorkflowDetails from './WorkflowDetails';
 import Statuses from './Statuses';
+import { Status } from '../../lib/StatusLib';
 
 //please fix this component to be able to pass workflowObj and statuses to WorkflowDetails component
 class WorkflowForm extends Component {
@@ -109,7 +110,7 @@ class WorkflowForm extends Component {
         menuItem: 'Workflow Initial Details',
         render: () => (
           <Tab.Pane>
-            <WorkflowDetails workflowObj={workflowObj} chatbots={chatbots} updateActivePaneIndex={this.updateActivePaneIndex} />
+            <WorkflowDetails fetchWorkflow={this.fetchWorkflow} workflowObj={workflowObj} chatbots={chatbots} updateActivePaneIndex={this.updateActivePaneIndex} />
           </Tab.Pane>
         ),
       },
@@ -117,7 +118,7 @@ class WorkflowForm extends Component {
         menuItem: 'Statuses',
         render: () => (
           <Tab.Pane>
-            <Statuses workflowObj={workflowObj} updateActivePaneIndex={this.updateActivePaneIndex}/>
+            <Statuses fetchWorkflow={this.fetchWorkflow} workflowObj={workflowObj} updateActivePaneIndex={this.updateActivePaneIndex}/>
           </Tab.Pane>
         ),
       },

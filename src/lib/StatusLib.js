@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Form, Label, Tab, Input, Dropdown, Button } from 'semantic-ui-react';
+import { Variable } from './VariableLib';
 import { DataGrid, Column } from 'devextreme-react/data-grid';
 import { refreshPage } from '../utils/Utils';
 
@@ -11,12 +11,28 @@ export class Status {
     if (!params.self_occuring_conditions) {
       params.self_occuring_conditions = []
     }
+
     this.id = params.id
     this.content = params.label
     this.api_name = params.api_name
-    this.variables = params.variables
+    this.variables = params.variables ? params.variables.map((variable) => new Variable(this, variable.name, variable.description, variable.datatype, variable.api_name, variable.id)) : []
     this.status_level_actions = params.status_level_actions
     this.self_occuring_conditions = params.self_occuring_conditions
+    this.setChildrenStatuses(params, coordinates);
+    this.setParentStatuses(params);
+    this.coordinates = coordinates
+    this.activePaneIndex = 0
+    // this.heightPercentage = null
+    // this.indexPercentageInRow = null
+  }
+
+  // setHeightPercentageAndIndexPercentageInRow(heightPercentage, indexPercentage) {
+  //   this.heightPercentage = heightPercentage
+  //   this.indexPercentageInRow = indexPercentage
+  //   this.coordinates = [, ]
+  // }
+
+  setChildrenStatuses(params, coordinates) {
     const childrenList = [];
     this.childrenIds = [];
     const noOfChildren = params.children.length;
@@ -30,26 +46,15 @@ export class Status {
         }))
       })
     }
-    this.parentIds = this.self_occuring_conditions.length > 0 ? this.self_occuring_conditions.map((link) => link.parent_id) : []
     this.children = [...childrenList]
-    this.coordinates = coordinates
-    this.activePaneIndex = 0
-    // this.heightPercentage = null
-    // this.indexPercentageInRow = null
   }
 
-  // setHeightPercentageAndIndexPercentageInRow(heightPercentage, indexPercentage) {
-  //   this.heightPercentage = heightPercentage
-  //   this.indexPercentageInRow = indexPercentage
-  //   this.coordinates = [, ]
-  // }
+  setParentStatuses(params) {
+    this.parentIds = this.self_occuring_conditions.length > 0 ? this.self_occuring_conditions.map((link) => link.parent_id) : []
+  }
 
   setStartStatusFlag() {
     this.startStatus = true
-  }
-
-  setParentId(value) {
-    this.parentIds = value
   }
 
   editParentStatus = (newParent) => {
@@ -176,7 +181,7 @@ export class Status {
       links.push({
         input: `${this.id}`,
         output: `${childLink.id}`,
-        // label: `Link from ${this.content} to ${childLink.content}`,
+        label: `Link from ${this.content} to ${childLink.content}`,
       })
     })
     return links;
@@ -222,4 +227,31 @@ export class Status {
   setLabel(value) {
     this.content = value;
   }
+
+  name() {
+    return this.content;
+  }
+
+  createVariable(variable) {
+    if (variable.createOrUpdateVariable(this.id)) {
+      this.variables.push(variable)
+    }
+  }
+
+  clone() {
+    const clonedStatus = new Status({
+      id: this.id,
+      label: this.content,
+      api_name: this.api_name,
+      variables: this.variables,
+      status_level_actions: this.status_level_actions,
+      self_occuring_conditions: this.self_occuring_conditions,
+      children: this.children,
+    }, this.coordinates)
+    if (this.startStatus) {
+      clonedStatus.setStartStatusFlag(this.startStatus)
+    }
+    return clonedStatus
+  }
+
 }

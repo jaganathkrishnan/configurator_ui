@@ -80,6 +80,7 @@ export default class EditStatusForm extends Component {
     event.preventDefault();
     const { statusObj } = this.state;
     statusObj.editStatusName();
+    this.props.fetchWorkflow()
   }
 
   //generate code to add one section for name update, another for status variables create/edit and another section for editing parent status and another section for editing/adding children statuses
@@ -87,6 +88,7 @@ export default class EditStatusForm extends Component {
   handleParentStatusChange = (e, { name, value }) => {
     //it should update parent status id in the status object
     // const { statusObj } = this.state;
+    debugger;
     this.setState({
       newParent: value
     })
@@ -95,11 +97,13 @@ export default class EditStatusForm extends Component {
   editParentStatus = (event) => {
     event.preventDefault();
     const { statusObj, originalStatusObj, newParent } = this.state;
+    debugger;
     const ifSuccess = statusObj.editParentStatus(newParent);
     if (ifSuccess === true) {
+      this.props.fetchWorkflow()
       this.setState({
-        statusObj,
-        originalStatusObj: statusObj,
+        statusObj: statusObj.clone(),
+        originalStatusObj: statusObj.clone(),
         newParent: null
       })
     } else {
@@ -114,12 +118,14 @@ export default class EditStatusForm extends Component {
   editChildStatus = (event) => {
     event.preventDefault();
     const { statusObj, originalStatusObj, newChild } = this.state;
+    debugger;
     const ifSuccess = statusObj.editChildStatus(newChild);
 
     if (ifSuccess === true) {
+      this.props.fetchWorkflow()
       this.setState({
-        statusObj,
-        originalStatusObj: statusObj,
+        statusObj: statusObj.clone(),
+        originalStatusObj: statusObj.clone(),
         newChild: null
       })
     } else {
@@ -133,6 +139,7 @@ export default class EditStatusForm extends Component {
 
   handleChildStatusChange = (e, { name, value }) => {
     //it should update child status id in the status object
+    debugger;
     this.setState({
       newChild: value
     })
