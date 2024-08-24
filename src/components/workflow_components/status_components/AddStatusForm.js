@@ -42,7 +42,7 @@ export default class AddStatusForm extends Component {
         throw response
       }
     } catch(error) {
-      const result = [];
+      const result = {"data":[{"id":2,"label":"Start","google_form_id":"","created_at":"2024-06-21T18:38:49.329Z","updated_at":"2024-08-17T06:33:08.850Z","api_name":"sample_start_1718995129"},{"id":7,"label":"Second Status","google_form_id":"","created_at":"2024-07-23T12:11:05.159Z","updated_at":"2024-08-01T11:43:23.715Z","api_name":"New Status_1721736665"},{"id":8,"label":"Status 3","google_form_id":"","created_at":"2024-08-01T16:07:52.016Z","updated_at":"2024-08-01T16:07:52.016Z","api_name":"Status 3_1722528472"},{"id":9,"label":"Status 4","google_form_id":"","created_at":"2024-08-03T08:18:24.897Z","updated_at":"2024-08-03T08:18:24.897Z","api_name":"Status 4_1722673104"},{"id":10,"label":"Status 5","google_form_id":"","created_at":"2024-08-17T05:22:45.466Z","updated_at":"2024-08-17T05:22:45.466Z","api_name":"Status 5_1723872165"}]};
         const eligibleParentStatuses = result["data"].map((status) => {
           return {
             key: status["id"],
