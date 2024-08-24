@@ -42,6 +42,17 @@ export default class AddStatusForm extends Component {
         throw response
       }
     } catch(error) {
+      const result = [];
+        const eligibleParentStatuses = result["data"].map((status) => {
+          return {
+            key: status["id"],
+            text: status["label"],
+            value: status["id"]
+          }
+        })
+        this.setState({
+          eligibleParentStatuses
+        })
       console.log(error)
     }
   }

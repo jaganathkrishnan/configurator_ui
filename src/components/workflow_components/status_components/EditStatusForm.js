@@ -59,6 +59,28 @@ export default class EditStatusForm extends Component {
         throw response
       }
     } catch(error) {
+      const result = []
+        const eligibleParentStatuses = result["data"].map((status) => {
+          return {
+            key: status["id"],
+            text: status["label"],
+            value: status["id"]
+          }
+        }).filter((status) => status["key"] !== statusObj.id)
+
+        const eligibleChildrenStatuses = result["data"].filter((status) => status.id !== rootStatusId).map((status) => {
+          return {
+            key: status["id"],
+            text: status["label"],
+            value: status["id"]
+          }
+        }).filter((status) => status["key"] !== statusObj.id)
+
+        this.setState({
+          eligibleParentStatuses,
+          eligibleChildrenStatuses
+        })
+
       console.log(error)
     }
   }
