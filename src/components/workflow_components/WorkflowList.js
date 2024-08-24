@@ -46,6 +46,23 @@ export default class WorkflowList extends Component {
         this.setState({ error: result });
       }
     } catch (err) {
+      // const response = await fetch('http://localhost:1001/workflows', {
+      //   method: 'GET',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': `Bearer ${localStorage.getItem('apartix_session_id')}` // Replace with your actual token or header value
+      //   }
+      // }); // Replace with your API endpoint
+      const result = {"data":[{"id":2,"name":"Sample Workflow 1","workflow_type":"default","start_status_id":2,"created_at":"2024-06-21T18:38:49.359Z","updated_at":"2024-07-05T21:09:55.797Z","chat_bot_id":4,"is_published":true},{"id":3,"name":"Compliants testing","workflow_type":"default","start_status_id":3,"created_at":"2024-06-22T09:41:38.164Z","updated_at":"2024-08-17T06:38:23.872Z","chat_bot_id":4,"is_published":true}]}
+      // const result = await response.json();
+      // if (response.ok) {
+        const data = result["data"].map((workflowRecord) => {
+          return new Workflow(workflowRecord)
+        })
+        this.setState({ workflows: data });
+      // } else {
+      //   this.setState({ error: result });
+      // }
       this.setState({ error: err.message });
     }
   }

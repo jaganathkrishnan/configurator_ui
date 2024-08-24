@@ -38,6 +38,8 @@ class Login extends Component {
       })
 
     } catch (error) {
+      localStorage.setItem('apartix_session_id', "remove this later" );
+      window.location.href = `${window.location.origin}/home`
       console.error('Login error:', error);
     }
   }
