@@ -62,6 +62,11 @@ class WorkflowForm extends Component {
         this.setState({ error: result });
       }
     } catch (err) {
+      const result = {"data":[{"id":4,"name":"Testing","is_active":true,"chat_bot_type":"society"}]}
+      const data = result["data"].map((chatBotRecord) => {
+        return new Chatbot(chatBotRecord)
+      })
+      this.setState({ chatbots: data });
       this.setState({ error: err.message });
     }
   };
