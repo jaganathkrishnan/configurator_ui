@@ -19,7 +19,7 @@ export default class StatusForm extends Component {
     const { newStatus, statusObj, workflowId } = this.state;
     const { rootStatusId } = this.props;
 
-    return newStatus ? <AddStatusForm workflowId={workflowId} statusObj={statusObj} /> : <EditStatusForm workflowId={workflowId} statusObj={statusObj} rootStatusId={rootStatusId} />;
+    return newStatus ? <AddStatusForm fetchWorkflow={this.props.fetchWorkflow} workflowId={workflowId} statusObj={statusObj} /> : <EditStatusForm fetchWorkflow={this.props.fetchWorkflow} workflowId={workflowId} statusObj={statusObj} rootStatusId={rootStatusId} />;
   }
 
   render() {

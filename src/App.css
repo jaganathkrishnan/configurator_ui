@@ -139,3 +139,15 @@ body > dx-license:nth-child(1) {
   margin-top: 15px;
   padding: 15px
 }
+
+.status-variable-form {
+  margin-bottom: 25px;
+}
+
+.workflow-form-container div div.ui.bottom.attached.segment.active.tab div.status-variable-form form.ui.form div.field table.ui.table tr th, .workflow-form-container div div.ui.bottom.attached.segment.active.tab div.status-variable-form form.ui.form div.field table.ui.table tr td {
+  padding: 5px;
+  border-width: 1px;
+}
+
+#variable-centered-modal {
+}
