@@ -10,7 +10,6 @@
 }
 
 .register-container {
-  margin-top: 10%;
   padding: 20px;
   background-color: #D3D3D3;
   border-radius: 8px;
@@ -53,7 +52,6 @@
 .reg-info {
   width: 30%; 
   height: 65vh; 
-  margin-top: 10%;
   margin-right: 10%;
   border-radius: 40px;
   background-color: #007FFF;

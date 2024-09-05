@@ -1,43 +1,65 @@
-/* App.css */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
-
 }
+
 html {
   scroll-behavior: smooth;
 }
-.navbar {
-  position: fixed;
-  display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  background-color: #D3D3D3;
-  padding: 1rem 2rem; 
-  margin: 1rem;
-  width: 50%; 
-  margin-left: 49%;
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
-dx-license {
-  display: none !important;
+.navbar-container {
+  display: flex;
+  justify-content: space-between; /* Ensures space between logo and navbar links */
+  align-items: center;
+  background-color: #d3d3d3;
+  padding: 1rem 2rem;
+  width: 100%;
+  z-index: 10;
+}
+
+.logo-container {
+  flex: 0 0 auto;
+  background-color: #d3d3d3;
+}
+
+.logo {
+  text-decoration: none;
+  color: #333;
+  font-size: 24px;
+  background-color: #d3d3d3;
+}
+
+.logo:hover {
+  color: green;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Pushes navbar links to the right */
+  background-color: #d3d3d3; 
+  padding: 0.5rem 1rem; 
+  border-radius: 4px; 
 }
 
 .nav-link {
   color: rgb(5, 5, 5);
   text-decoration: none;
-}
-.nav-link:hover{
-  color: green;
-}
-.nav-link {
   position: relative;
-  text-decoration: none;
-  color: #333;
   font-size: 18px;
-  padding-bottom: 5px; 
+  padding-bottom: 5px;
+  margin-right: 50px;
+}
+
+.nav-link:hover {
+  color: green;
 }
 
 .nav-link::after {
@@ -45,109 +67,48 @@ dx-license {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0; /* Initially hide the underline */
-  height: 2px; /* Thickness of the underline */
-  background-color: #333; /* Color of the underline */
-  transition: width 0.3s ease; /* Animation for the underline */
+  width: 0;
+  height: 2px;
+  background-color: #333;
+  transition: width 0.3s ease;
 }
 
 .nav-link:hover::after {
-  width: 100%; /* Expand the underline on hover */
+  width: 100%;
+}
+
+.content-wrapper {
+  display: flex;
+  padding-top: 4rem;
+  margin-left: auto;
+  width: 100%;
+}
+
+.sidebar {
+  width: 15%;
+  background-color: #D3D3D3;
+  padding: 1rem;
+  position: sticky;
+  right: 0;
+  top: 4rem;
+  height: calc(100vh - 4rem);
 }
 
 .sidebar-content {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 0.5rem;
+  background-color: #D3D3D3;
 }
 
 .sidebar-content a {
   text-decoration: none;
   color: black;
-  padding: 0.5rem 0;
-}
-
-.active-link {
-  font-weight: bold;
-}
-
-button {
-  margin: 1rem;
-}
-
-.App {
-  display: flex;
-  flex-direction: column;
-}
-
-.menu-button {
-  margin-top: 20px;
-  margin-left: 85%;
-  width: 100px;
-  float: right;
-  background-color: #fff;
-  border-color: #ddd;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.add-chatbot-button, .add-workflow-button {
-  margin-left: 92.20%;
-  margin-bottom: 20px;
-}
-
-.chatbot-list-container, .workflow-list-container {
-  width: 90%;
-  margin-left: 30px;
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-body > dx-license:nth-child(1) {
-  display: none;
-}
-
-.chatbot-list-container > .add-chatbot-form {
-  width: 500px;
-}
-
-.input-generic {
-  margin: 2.5px
-}
-
-.bread-crumb {
-  display: block;
-  width: 100%;
-}
-
-.workflow-form-container {
-  padding-top: 2%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-
-.ui.button.add-new-status-button {
-  margin-left: 50px;
-  margin-top: 10px;
-  width: 150px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.add-status-form {
-  margin-top: 15px;
-  padding: 15px
-}
-
-.status-variable-form {
-  margin-bottom: 25px;
-}
-
-.workflow-form-container div div.ui.bottom.attached.segment.active.tab div.status-variable-form form.ui.form div.field table.ui.table tr th, .workflow-form-container div div.ui.bottom.attached.segment.active.tab div.status-variable-form form.ui.form div.field table.ui.table tr td {
-  padding: 5px;
-  border-width: 1px;
-}
-
-#variable-centered-modal {
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid grey;
+  border-radius: 4px;
+  background-color: #d3d3d3;
+  transition: background-color 0.3s ease, background-position 0.3s ease;
+  background-image: linear-gradient(to right, #f0f0f0 50%, #d3d3d3 50)
 }
