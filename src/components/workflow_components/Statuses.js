@@ -9,7 +9,7 @@ import StatusForm from './StatusForm';
 import { refreshPage } from '../../utils/Utils';
 import { Variable } from '../../lib/VariableLib';
 import VariableModal from './VariableModal';
-
+import '../../styling/WorkflowStatus.css';
 export default class Statuses extends Component {
 
   constructor(props){
@@ -289,7 +289,7 @@ export default class Statuses extends Component {
 
         <Form.Field>
           {variableSelectedStatus && variableSelectedStatus.variables && variableSelectedStatus.variables.length > 0 ? (
-          <h3>Selected Status Existing Variables</h3>
+          <h3 style={{ margin: '10px' }}>Selected Status Existing Variables</h3>
           ) : (
           <></>
           )}
@@ -304,6 +304,7 @@ export default class Statuses extends Component {
               <tr key={variable.name}>
               <td>{variable.name}</td>
               <td>
+              
                 <Button onClick={() => this.updateEditVariable(variable)} >Edit</Button>
                 <Button>Delete</Button>
               </td>
@@ -316,7 +317,7 @@ export default class Statuses extends Component {
       </div>
 
       <Form onSubmit={this.handleSubmit}>
-        <Button type="submit">Save and move to next step</Button>
+        <Button className="savebutton" type="submit">Save and move to next step</Button>
       </Form>
       <style>
         {`

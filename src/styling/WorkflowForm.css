@@ -1,0 +1,67 @@
+/* General styles for the WorkflowForm */
+.workflow-form-container {
+    padding: 20px;
+    background-color: #D3D3D3; /* Updated background color */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* External box shadow */
+}
+
+.workflow-form-container h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.bread-crumb {
+    display: inline-block;
+    text-decoration: none; /* Removed underline from breadcrumb links */
+    color: #007bff;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.bread-crumb:hover {
+    text-decoration: none; /* Ensure underline is removed on hover */
+    color: #0056b3;
+}
+
+/* Tab Styling */
+.ui.tab {
+    padding: 20px;
+    background-color: #D3D3D3; /* Updated background color */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ui.tab h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.ui.tab p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Custom tab menu styling */
+.ui.menu .item {
+    color: #333;
+    font-size: 18px;
+    padding: 10px 20px;
+    text-decoration: none; /* Ensure no underline on menu items */
+}
+
+.ui.menu .item.active {
+    background-color: #606060; /* Dark grey */
+    color: white;
+    border-radius: 8px;
+}
+
+.ui.menu .item:hover {
+    background-color: #6c6c6c; /* Replace with the hover color from app.css */
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+}

@@ -13,7 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: true,
+      isLoggedIn: true, // Set to true for logged-in state
     };
   }
 
@@ -28,7 +28,11 @@ class App extends Component {
               <Link to="/" className="logo">Logoplaceholder</Link>
             </div>
             <nav className="navbar">
-              <Link to="/" className="nav-link">Home</Link>
+              {isLoggedIn ? (
+                <Link to="/" className="nav-link">Logout</Link> // Replace Home with Logout
+              ) : (
+                <Link to="/" className="nav-link">Home</Link>
+              )}
               {!isLoggedIn && (
                 <>
                   <Link to="/login" className="nav-link">Login</Link>

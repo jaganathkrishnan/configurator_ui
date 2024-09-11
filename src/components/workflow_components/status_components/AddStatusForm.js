@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Dropdown, Label, Button } from 'semantic-ui-react';
-
+import '../../../styling/AddStatusForm.css';
 export default class AddStatusForm extends Component {
-
   constructor(props) {
     super(props);
     this.state = {

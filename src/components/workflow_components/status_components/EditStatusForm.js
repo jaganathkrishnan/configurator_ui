@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Dropdown, Label, Button } from 'semantic-ui-react';
 import { Table } from 'semantic-ui-react';
-
+import '../../../styling/EditStatusForm.css';
 export default class EditStatusForm extends Component {
 
   constructor(props) {
@@ -178,12 +178,12 @@ export default class EditStatusForm extends Component {
     return (
       <Form className="add-status-form">
         <Form.Group>
-          <label style={{"marginRight": "15px"}}>
+          <label style={{"marginRight": "20px"}}>
             {"Status Label"}
           </label>
           <Input requied onChange={(event) => this.handleLabelValueChange(event)} value={this.state.statusObj.content}>
           </Input>
-          <Button style={{"marginLeft": "400px"}} onClick={this.editStatusName}>Edit Status Name</Button>
+          <Button className='editdeletebtn' style={{"marginLeft": "400px"}} onClick={this.editStatusName}>Edit Status Name</Button>
         </Form.Group>
 
         {/* TO-DO: Make a border around the given sections for parent statuses */}

@@ -1,0 +1,81 @@
+    /* Container for the WorkflowDetails component */
+    .workflow-details-container {
+        padding: 20px;
+        background-color: #d3d3d3; /* Light background color for form */
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        max-width: 800px; /* Limit the width for better readability */
+        margin: auto; /* Center the container */
+    }
+
+    /* Heading for the Workflow Details section */
+    .workflow-details-container h3 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* Style for each form field */
+    .workflow-details-container .field {
+        margin-bottom: 20px;
+    }
+
+    /* Label for form fields */
+    .workflow-details-container label {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    /* Style for input fields */
+    .workflow-details-container input,
+    .workflow-details-container .ui.dropdown {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        box-sizing: border-box; /* Ensure padding is included in width */
+    }
+
+    /* Style for the checkbox container */
+    .workflow-details-container .checkbox-container {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        margin: 10px 0;
+        margin-right: 77%;
+    }
+
+    /* Style for the checkbox */
+    .workflow-details-container .ui.checkbox {
+        margin: 0;
+        padding: 0;
+        margin-right: 10px; /* Space between checkbox and label */
+    }
+
+    /* Style for the checkbox label */
+    .workflow-details-container .checkbox-label {
+        font-size: 16px;
+        color: #333;
+    }
+
+    /* Style for the submit button */
+    .workflow-details-container .ui.button {
+        background-color: #333; /* Primary button color */
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Hover effect for the submit button */
+    .workflow-details-container .ui.button:hover {
+        background-color: grey; /* Darker shade for hover effect */
+    }

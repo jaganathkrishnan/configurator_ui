@@ -86,29 +86,29 @@ body {
 
 .sidebar {
   width: 15%;
-  background-color: #D3D3D3;
-  padding: 1rem;
+  padding: 1rem 0; /* Padding only vertically, removes padding on sides */
   position: sticky;
   right: 0;
   top: 4rem;
-  height: calc(100vh - 4rem);
 }
 
 .sidebar-content {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
-  background-color: #D3D3D3;
+  background-color: #4a4a4a; /* Dark grey background */
+  border-top: 1px solid grey;
 }
 
 .sidebar-content a {
   text-decoration: none;
-  color: black;
-  padding: 0.8rem;
-  margin: 0.5rem 0;
-  border: 1px solid grey;
-  border-radius: 4px;
-  background-color: #d3d3d3;
-  transition: background-color 0.3s ease, background-position 0.3s ease;
-  background-image: linear-gradient(to right, #f0f0f0 50%, #d3d3d3 50)
+  color: white; /* Text color for better contrast */
+  padding: 1rem; /* Make buttons larger */
+  border-bottom: 1px solid grey; /* Border separating buttons */
+  background-color: #4a4a4a; /* Match background color */
+  display: block;
+  text-align: center;
+}
+
+.sidebar-content a:hover {
+  background-color: #6c6c6c; /* Darker grey on hover */
 }

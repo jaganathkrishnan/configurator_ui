@@ -1,0 +1,104 @@
+/* EditStatusForm.css */
+.add-status-form {
+    background-color: #d3d3d3;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.add-status-form .ui.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-status-form label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.add-status-form .ui.input {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.add-status-form .ui.dropdown {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* Edit/Delete button styling */
+.editdeletebtn {
+    background-color: #333 t;
+    color: white ;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: auto; 
+}
+
+.editdeletebtn:hover {
+    background-color: grey;
+}
+
+/* Main buttons styling */
+.add-status-form .ui.button {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-status-form .ui.button:hover {
+    background-color: grey;
+}
+
+/* Border around sections */
+.add-status-form .parent-status-section,
+.add-status-form .child-status-section {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.add-status-form .parent-status-section label,
+.add-status-form .child-status-section label {
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+/* Table styling */
+.add-status-form .ui.table {
+    margin-top: 10px;
+}
+
+.add-status-form .ui.table .ui.button {
+    background-color: #333;
+    color: white;
+}
+
+.add-status-form .ui.table .ui.button:hover {
+    background-color: grey;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .add-status-form {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .add-status-form .ui.button {
+        width: 100%;
+    }
+}
