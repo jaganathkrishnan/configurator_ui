@@ -1,31 +1,33 @@
-/* Login.css */
 * {
-  background-color: #D3D3D3;
+  background-color: var(--background-color);
 }
 
 body {
-  margin: 0; /* Ensure there's no default margin that interferes */
+  margin: 0;
   padding: 0;
 }
 
 .login-parent {
   display: flex;
-  justify-content: space-between; /* Space between form and image */
-  flex-direction: row-reverse; 
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 100vh;
   overflow: hidden;
 }
 
 .login-container {
-  padding: 20px;
-  background-color: #D3D3D3;
+  padding: 30px;
+  background-color: var(--background-color);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 2px solid #0073b1; /* Add border */
-  max-width: 50%;
-  width: 50%;
+  box-shadow: var(--box-shadow);
+  max-width: 600px;
+  width: 90%;
+  height: 100%; /* Increased height for a taller container */
+  margin: 20px;
+  margin-top: 4%;
+  margin-right: 20%;
 }
 
 .login-container h2 {
@@ -58,31 +60,35 @@ body {
   background-color: #005580;
 }
 
-.image-login {
-  flex: 1;
-  width: 50%; /* Set width to 50% */
-  height: 100vh; /* Ensure it takes up the full viewport height */
-  mix-blend-mode: multiply;
-  margin: 0; /* Remove margins for better alignment */
+.aoa-input-container,
+.email-input-container,
+.pass-input-container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  margin: 15px 0;
+}
+
+.aoa-input-container i,
+.email-input-container i,
+.pass-input-container i {
+  font-size: 20px;
+  color: black;
+  margin-right: 10px;
 }
 
 @media (max-width: 768px) {
   .login-parent {
-    flex-direction: column;
     align-items: center;
   }
 
-  .login-container, .image-login {
-    max-width: 90%; /* Ensure full width on smaller screens */
+  .login-container {
+    max-width: 90%;
     margin: 10px 0;
   }
 }
 
 @media (max-width: 480px) {
-  .login-container, .image-login {
+  .login-container {
     max-width: 100%;
     padding: 10px;
   }

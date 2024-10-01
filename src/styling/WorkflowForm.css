@@ -1,9 +1,10 @@
 /* General styles for the WorkflowForm */
 .workflow-form-container {
     padding: 20px;
-    background-color: #D3D3D3; /* Updated background color */
+    background-color: var(--background-color); /* Updated background color */
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* External box shadow */
+    box-shadow: var(--box-shadow);
+    margin-left: 0%;
 }
 
 .workflow-form-container h1 {
@@ -29,10 +30,10 @@
 /* Tab Styling */
 .ui.tab {
     padding: 20px;
-    background-color: #D3D3D3; /* Updated background color */
+    background-color: var(--background-color); /* Updated background color */
     border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
 }
 
 .ui.tab h3 {

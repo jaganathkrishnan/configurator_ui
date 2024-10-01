@@ -1,3 +1,18 @@
+:root {
+  --primary-color: #333;
+  --background-color: #d3d3d3;
+  --hover-color: #6c6c6c;
+  --button-color: #007bff;
+  --button-hover-color: #0056b3;
+  --text-color: #333;
+  --light-background: #f8f9fa;
+  --font-large: 24px;
+  --font-medium: 18px;
+  --font-small: 16px;
+  --border-radius: 8px;
+  --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,9 +31,9 @@ body {
 
 .navbar-container {
   display: flex;
-  justify-content: space-between; /* Ensures space between logo and navbar links */
+  justify-content: space-between;
   align-items: center;
-  background-color: #d3d3d3;
+  background-color: var(--background-color);
   padding: 1rem 2rem;
   width: 100%;
   z-index: 10;
@@ -26,14 +41,14 @@ body {
 
 .logo-container {
   flex: 0 0 auto;
-  background-color: #d3d3d3;
+  background-color: var(--background-color);
 }
 
 .logo {
   text-decoration: none;
   color: #333;
   font-size: 24px;
-  background-color: #d3d3d3;
+  background-color: var(--background-color);
 }
 
 .logo:hover {
@@ -43,10 +58,10 @@ body {
 .navbar {
   display: flex;
   align-items: center;
-  margin-left: auto; /* Pushes navbar links to the right */
-  background-color: #d3d3d3; 
-  padding: 0.5rem 1rem; 
-  border-radius: 4px; 
+  margin-left: auto;
+  background-color: var(--background-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
 }
 
 .nav-link {
@@ -79,36 +94,46 @@ body {
 
 .content-wrapper {
   display: flex;
-  padding-top: 4rem;
+  padding-top: 0;
   margin-left: auto;
   width: 100%;
 }
 
 .sidebar {
-  width: 15%;
-  padding: 1rem 0; /* Padding only vertically, removes padding on sides */
-  position: sticky;
-  right: 0;
+  width: 250px;
+  margin-top:2%;
+  height: calc(100vh - 4rem);
+  padding: .6rem 0;
+  position: fixed;
+  left: 0;
   top: 4rem;
+  background-color: #4a4a4a;
+  overflow-y: auto;
 }
 
 .sidebar-content {
   display: flex;
   flex-direction: column;
-  background-color: #4a4a4a; /* Dark grey background */
-  border-top: 1px solid grey;
+  height: 100%;
 }
 
 .sidebar-content a {
   text-decoration: none;
-  color: white; /* Text color for better contrast */
-  padding: 1rem; /* Make buttons larger */
-  border-bottom: 1px solid grey; /* Border separating buttons */
-  background-color: #4a4a4a; /* Match background color */
+  color: white;
+  padding: 1rem;
+  border-bottom: 1px solid grey;
+  background-color: #4a4a4a;
   display: block;
   text-align: center;
 }
 
 .sidebar-content a:hover {
-  background-color: #6c6c6c; /* Darker grey on hover */
+  background-color: #6c6c6c;
 }
+
+.main-content {
+  margin-left: 250px;
+  padding: 2rem;
+  width: calc(100% - 250px);
+}
+  

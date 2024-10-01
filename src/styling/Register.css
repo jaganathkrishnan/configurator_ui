@@ -6,17 +6,16 @@
   flex-wrap: wrap;
   max-width: 100%;
   max-height: 100%;
-  overflow: hidden;
 }
 
 .register-container {
   padding: 20px;
-  background-color: #D3D3D3;
+  background-color: var(--background-color);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   max-width: 50%;
   width: 40%;
-  
+  margin-right: 20%;
 }
 
 .register-container h2 {
@@ -55,7 +54,7 @@
   margin-right: 10%;
   border-radius: 40px;
   background-color: #007FFF;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
   justify-content: center; 

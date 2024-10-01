@@ -6,14 +6,14 @@ import Register from './components/Register.js';
 import ChatbotList from './components/chatbot_components/ChatbotList.js';
 import WorkflowList from './components/workflow_components/WorkflowList.js';
 import WorkflowForm from './components/workflow_components/WorkflowForm.js';
-import './App.css';  // Import the CSS for global styles and the App component
+import './App.css';
 import 'beautiful-react-diagrams/styles.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: true, // Set to true for logged-in state
+      isLoggedIn: false,
     };
   }
 
@@ -29,7 +29,7 @@ class App extends Component {
             </div>
             <nav className="navbar">
               {isLoggedIn ? (
-                <Link to="/" className="nav-link">Logout</Link> // Replace Home with Logout
+                <Link to="/" className="nav-link">Logout</Link>
               ) : (
                 <Link to="/" className="nav-link">Home</Link>
               )}
@@ -49,6 +49,13 @@ class App extends Component {
                   <NavLink to="/workflows" activeClassName="active-link">Workflows</NavLink>
                   <NavLink to="/user_management" activeClassName="active-link">User Management</NavLink>
                   <NavLink to="/society_details" activeClassName="active-link">Society Details</NavLink>
+                  <NavLink to="/placeholder1" activeClassName="active-link">Placeholder 1</NavLink>
+                  <NavLink to="/placeholder2" activeClassName="active-link">Placeholder 2</NavLink>
+                  <NavLink to="/placeholder3" activeClassName="active-link">Placeholder 3</NavLink>
+                  <NavLink to="/placeholder3" activeClassName="active-link">Placeholder 4</NavLink>
+                  <NavLink to="/placeholder3" activeClassName="active-link">Placeholder 5</NavLink>
+                  <NavLink to="/placeholder3" activeClassName="active-link">Placeholder 6</NavLink>
+                  <NavLink to="/placeholder3" activeClassName="active-link">Placeholder 7</NavLink>
                 </div>
               </div>
             )}
