@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { DataGrid, Column } from 'devextreme-react/data-grid';
 import 'devextreme/dist/css/dx.light.css';
 import Button from 'devextreme-react/button';
-import withSessionCheck from '../../higher_order_components/CheckSession.js';
-import { Chatbot } from '../../lib/ChatbotLib.js';
-import AddChatbot from './AddChatbot.js';
+import { Chatbot } from '../../lib/ChatbotLib';
+import AddChatbot from './AddChatbot';
+import '../../styling/chatbot.css';
 
 class ChatbotList extends Component {
   constructor(props) {
@@ -12,16 +12,13 @@ class ChatbotList extends Component {
     this.state = {
       chatbots: [],
       error: null,
-      showChatbotForm: false
+      showChatbotForm: false,
     };
   }
 
   componentDidMount() {
-    if (!localStorage.getItem('apartix_session_id')) {
-      window.location.href = `${window.location.origin}/login`
-    } else {
-      this.fetchChatbots();
-    }
+    // Temporarily bypass authentication
+    this.fetchChatbots();
   }
 
   fetchChatbots = async () => {
@@ -30,87 +27,56 @@ class ChatbotList extends Component {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('apartix_session_id')}` // Replace with your actual token or header value
-        }
-      }); // Replace with your API endpoint
+          // 'Authorization': `Bearer ${localStorage.getItem('apartix_session_id')}`, // Removed authentication for bypass
+        },
+      });
       const result = await response.json();
       if (response.ok) {
-        const data = result["data"].map((chatBotRecord) => {
-          return new Chatbot(chatBotRecord)
-        })
-        this.setState({ chatbots: data });
+        const chatbots = result.data.map((chatBotRecord) => new Chatbot(chatBotRecord));
+        this.setState({ chatbots });
       } else {
         this.setState({ error: result });
       }
     } catch (err) {
+      const result = {"data":[{"id":4,"name":"Testing","is_active":true,"chat_bot_type":"society"}]}
+      const data = result["data"].map((chatBotRecord) => {
+        return new Chatbot(chatBotRecord)
+      })
+      this.setState({ chatbots: data });
       this.setState({ error: err.message });
     }
   };
 
+  toggleChatbotForm = () => {
+    this.setState((prevState) => ({ showChatbotForm: !prevState.showChatbotForm }));
+  };
+
   handleAddChatbot = () => {
-    // Logic to add a new chatbot
-    this.setState({
-      showChatbotForm: true,
-      selectedChatbot: new Chatbot({id: null, name: null, api_token: null, is_active: false, bot_username: null, chat_bot_type: "Society"})
-    })
+    this.toggleChatbotForm();
   };
-
-  handleDeleteChatbot = (id) => {
-    // Logic to delete a chatbot by id
-    const toDeleteChatbot = this.state.chatbots.filter(chatbot => chatbot.id() !== id)[0];
-    toDeleteChatbot.deleteRecord();
-    window.location.reload();
-  };
-
-  handleActivateChatbot = (id) => {
-    const toEditChatbot = this.state.chatbots.filter(chatbot => chatbot.id() !== id)[0];
-    toEditChatbot.editRecord();
-    window.location.reload();
-  }
-
-  closeAddChatbotSidebar = () => {
-    this.setState({
-      showChatbotForm: false,
-      selectedChatbot: null
-    })
-  }
-
-  updateChatBotList = (chatBot) => {
-    const { chatbots } = this.state;
-    this.setState({
-      chatbots: [...chatbots, chatBot]
-    })
-  }
 
   render() {
-    const { chatbots, showChatbotForm, selectedChatbot, error } = this.state;
+    const { chatbots, showChatbotForm, error } = this.state;
 
     return (
-      <div className='chatbot-list-container'>
-        {this.props.renderMenuButton()}
+      <div className="chatbot-list-container">
+        <h1>Chatbot List</h1>
         {error && <p>Error: {error}</p>}
-        {showChatbotForm && <AddChatbot chatbot={selectedChatbot} sidebarOpen={true} handleSidebarClose={this.closeAddChatbotSidebar} updateChatBotList={this.updateChatBotList} />}
-        <Button
-          text="+ Add Chatbot"
-          className="add-chatbot-button"
-          onClick={this.handleAddChatbot}
-        />
-        <DataGrid
-          dataSource={chatbots}
-          keyExpr="id"
-          showBorders={true}
-        >
-          <Column dataField="name" caption="Name" />
-          <Column dataField="is_active" caption="Active" cellRender={({data}) => (
-            <p>{data.isActive() ? "Active" : "Inactive"}</p>
-          )} />
+        <Button text="+ Add Chatbot" className="add-chatbot-button" onClick={this.handleAddChatbot} />
+        {showChatbotForm && <AddChatbot fetchChatbots={this.fetchChatbots} toggleChatbotForm={this.toggleChatbotForm} />}
+        <DataGrid dataSource={chatbots} keyExpr="id" showBorders={true}>
+          <Column dataField="name" caption="Name" cellRender={({ data }) => <p>{data.name()}</p>} />
+          <Column dataField="is_active" caption="Is Active" cellRender={({ data }) => <p>{data.isActive() ? 'Active' : 'Inactive'}</p>} />
           <Column
             caption="Actions"
             cellRender={({ data }) => (
               <Button
-                text={data.isActive() ? "Deactivate" : "Activate"}
-                onClick={() => data.isActive() ? this.handleDeleteChatbot(data.id) : this.handleActivateChatbot(data.id)}
-              />
+                onClick={() => {
+                  window.location.href = `${window.location.origin}/chatbots/${data.id()}`;
+                }}
+              >
+                View Details
+              </Button>
             )}
           />
         </DataGrid>

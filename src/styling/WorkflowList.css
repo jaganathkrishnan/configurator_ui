@@ -1,0 +1,75 @@
+/* Workflow List Container */
+.workflow-list-container {
+  padding: 2rem;
+  background-color: var(--background-color);
+  border-radius: 4px;
+  box-shadow: var(--box-shadow);
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.add-workflow-button {
+  background-color: #007bff;
+  color: black;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid black; 
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-workflow-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-5px);
+}
+
+.workflow-data-grid {
+  border: 2px solid #D3D3D3; /* Set the border to be more pronounced */
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--background-color);
+}
+
+.dx-datagrid-headers {
+  background-color: #f8f9fa;
+  font-weight: bold; /* Make the header text bold */
+  border-bottom: 2px solid #ccc; /* Add a bottom border for separation */
+}
+
+.dx-data-grid-content {
+  background-color: #FFFFFF;
+}
+
+.dx-cell {
+  border-bottom: 1px solid #ddd; /* Add bottom border for each cell */
+  padding: 10px;
+}
+
+.dx-datagrid .dx-row {
+  border-bottom: 1px solid #ccc; /* Add a border between rows */
+}
+
+.dx-datagrid .dx-data-row:hover {
+  background-color: #f1f1f1;
+}
+
+.view-details-button {
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.view-details-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-5px);
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 20px;
+}
